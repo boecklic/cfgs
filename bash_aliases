@@ -29,3 +29,10 @@ fi
 # Generic for any platform
 alias gst='git status'
 echo -e "setting alias $(white 'gst') to $(lightgrey 'git status')"
+
+# some more ls aliases
+alias ll='ls -lF'
+echo -e "setting alias $(white 'll') to $(lightgrey 'ls -lF')"
+alias la='ls -la'
+echo -e "setting alias $(white 'la') to $(lightgrey 'ls -la')"
+
