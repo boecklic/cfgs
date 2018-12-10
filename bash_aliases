@@ -36,3 +36,6 @@ echo -e "setting alias $(white 'll') to $(lightgrey 'ls -lF')"
 alias la='ls -la'
 echo -e "setting alias $(white 'la') to $(lightgrey 'ls -la')"
 
+alias bc='bc -l'
+echo -e "setting alias $(white 'bc') to $(lightgrey 'bc -l') (preload math library and set scale to 20"
+
