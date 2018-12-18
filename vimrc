@@ -265,6 +265,13 @@ set laststatus=2
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
+" set number relativenumber " Turn line numbering on at startup
+set number " Turn line numbering on at startup
+" Toggle line numbers from none at all
+" to relative numbering with current line number
+" noremap <F3> :set invnumber invrelativenumber<CR> 
+noremap <F3> :set number invrelativenumber<CR> 
+" noremap <F3> :set invnumber<CR> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
