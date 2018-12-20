@@ -30,6 +30,9 @@ fi
 alias gst='git status'
 echo -e "setting alias $(white 'gst') to $(lightgrey 'git status')"
 
+alias grep='grep --color=auto'
+echo -e "setting alias $(white 'grep') to $(lightgrey 'grep --color=auto')"
+
 # some more ls aliases
 alias ll='ls -lF'
 echo -e "setting alias $(white 'll') to $(lightgrey 'ls -lF')"
