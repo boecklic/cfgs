@@ -40,5 +40,10 @@ alias la='ls -la'
 echo -e "setting alias $(white 'la') to $(lightgrey 'ls -la')"
 
 alias bc='bc -l'
-echo -e "setting alias $(white 'bc') to $(lightgrey 'bc -l') (preload math library and set scale to 20"
+echo -e "setting alias $(white 'bc') to $(lightgrey 'bc -l') (preload math library and set scale to 20)"
 
+alias screen='screen -R -D'
+echo -e "setting alias $(white 'screen') to $(lightgrey 'screen -D -R') (D)etach and (R)eattach a session here and now (detach if necessary, create if necessary)"
+
+alias tmx='tmux -a -d 0'
+echo -e "setting alias $(white 'tmx') to $(lightgrey 'tmux -a -d 0') reattach to session 0 "

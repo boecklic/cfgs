@@ -25,6 +25,11 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# include .bash_env if it exists
+if [ -f "$HOME/.bash_env" ]; then
+    . "$HOME/.bash_env"
+fi
+
 # set PATH so it includes user's private bin directories
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$HOME/.local/bin:$PATH"
@@ -34,12 +39,6 @@ fi
 if [ -d "/opt/local/bin" ] ; then
     PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 fi
-
-# get sm colors
-export TERM=xterm-color
-export GREP_COLOR='1;32'
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # make a nice prompt when in git repos
 # stuff for the git-prompt, check

@@ -14,3 +14,5 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 graceful_ln ${DIR}/bash_aliases 	~/.bash_aliases
 graceful_ln ${DIR}/vimrc 			~/.vimrc
 graceful_ln ${DIR}/profile          ~/.profile
+graceful_ln ${DIR}/bash_env         ~/.bash_env
+graceful_ln ${DIR}/tmux.conf        ~/.tmux.conf
