@@ -23,6 +23,7 @@
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
+"    -> vim-plug Plugin handling
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -39,6 +40,14 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -190,6 +199,17 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" jump to first tab
+map <C-Up> :tabr<cr>
+
+" jump to last tab
+map <C-Down> :tabl<cr>
+
+" jump to previous tab
+map <C-Left> :tabp<cr>
+
+" jump to next tab
+map <C-Right> :tabn<cr>
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -270,8 +290,8 @@ set number " Turn line numbering on at startup
 " Toggle line numbers from none at all
 " to relative numbering with current line number
 " noremap <F3> :set invnumber invrelativenumber<CR> 
-noremap <F3> :set number invrelativenumber<CR> 
-" noremap <F3> :set invnumber<CR> 
+noremap <F3> :set invnumber<CR> 
+noremap <F4> :set number invrelativenumber<CR> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -305,6 +325,8 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+" map <C-t>t :pop<cr>
+map <C-t>  :tabnew 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -389,3 +411,58 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-plug stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" for a fresh installation of vim-plug, execute
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+" To install Plugins run :PlugInstall
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/vim-plug')
+
+" Examples on how to specify plugin repositories:
+" https://github.com/junegunn/vim-plug
+" (Make sure you use single quotes)
+Plug 'https://github.com/scrooloose/nerdtree.git'
+
+" FocusGained and FocusLost autocommand events are not working 
+" in terminal vim. This plugin restores them when using vim inside 
+" Tmux. Also, vim-tmux-focus-events makes the autoread option work 
+" properly for terminal vim. So far, this was only working in a GUI 
+" version.
+" https://github.com/tmux-plugins/vim-tmux-focus-events
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Initialize plugin system
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree Plugin
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" open a NERDTree automatically when vim starts up if no files specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" open NERDTree with Ctrl+n (you can set whatever key you want)
+map <C-f> :NERDTreeToggle<CR>
+
+" automatically close NerdTree when you open a file
+let NERDTreeQuitOnOpen = 1
+" disable the 'Press ? for help' message on top
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" automatically delete the buffer of the file you just deleted with NerdTree
+let NERDTreeAutoDeleteBuffer = 1
+
+" automatically close a tab if the only remaining window is NerdTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
