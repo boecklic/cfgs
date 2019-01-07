@@ -45,5 +45,5 @@ echo -e "setting alias $(white 'bc') to $(lightgrey 'bc -l') (preload math libra
 alias screen='screen -R -D'
 echo -e "setting alias $(white 'screen') to $(lightgrey 'screen -D -R') (D)etach and (R)eattach a session here and now (detach if necessary, create if necessary)"
 
-alias tmx='tmux attach -d -t 0'
-echo -e "setting alias $(white 'tmx') to $(lightgrey 'tmux attach -d -t 0') reattach to session 0 "
+alias tmx='tmux new -A -s defaultSession'
+echo -e "setting alias $(white 'tmx') to $(lightgrey 'tmux new -A -s defaultSession') create or reattach to 'defaultSession' "
