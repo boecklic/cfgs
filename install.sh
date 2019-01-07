@@ -16,3 +16,8 @@ graceful_ln ${DIR}/vimrc 			~/.vimrc
 graceful_ln ${DIR}/profile          ~/.profile
 graceful_ln ${DIR}/bash_env         ~/.bash_env
 graceful_ln ${DIR}/tmux.conf        ~/.tmux.conf
+
+# slightly more logic needed for git-completion since dependant on git version
+GIT_VERSION=`git version | grep -oE "[0-9]*\.[0-9]*\.[0-9]*"`
+echo "current git version: $GIT_VERSION"
+graceful_ln ${DIR}/git-completion.bash.$GIT_VERSION        ~/.git-completion.bash
