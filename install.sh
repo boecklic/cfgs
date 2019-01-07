@@ -21,3 +21,11 @@ graceful_ln ${DIR}/tmux.conf        ~/.tmux.conf
 GIT_VERSION=`git version | grep -oE "[0-9]*\.[0-9]*\.[0-9]*"`
 echo "current git version: $GIT_VERSION"
 graceful_ln ${DIR}/git-completion.bash.$GIT_VERSION        ~/.git-completion.bash
+
+# setup vim
+#----------
+# setup vim-plug, the simple plugin manager for vim, for more details
+# check ~/.vimrc
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
