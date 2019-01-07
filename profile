@@ -54,3 +54,6 @@ if [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND='__git_ps1 "\u@\h:" "\\\$ "'
 fi
 
+# Set Window Title to Hostalias / Hostname
+TITLE="${HOSTALIAS:?$HOSTNAME}"
+echo -en "\e]0;Host: $USER@$TITLE\a"
