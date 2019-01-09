@@ -14,11 +14,22 @@ function get_pwd () {
 }
 
 function graceful_ln () {
-	if [ -e $2 ]
+	if [ -L "$2" ]
 	then
-		# symlink/file already exists
-		echo "symlink from $2 to $1 already exists, delete first"
-	else
-		ln -s $1 $2
+		# the existing file is a symlink, remove
+		echo "deleted old symlink from $2 -> $1"
+		rm $2
+	else	
+		if [ -e "$2" ]
+		then
+			# there is file (which is not a symlink) 
+			# existing at $2, move to $2.bak
+			echo "file exists for $2, moving to $2.bak "
+			mv $2 $2.bak
+		fi
 	fi
+	
+	# Create new symlink
+	ln -s $1 $2
+	echo "created symlink from $2 -> $1"
 }
