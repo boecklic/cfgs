@@ -33,6 +33,10 @@ echo -e "setting alias $(white 'gst') to $(lightgrey 'git status')"
 alias grep='grep --color=auto'
 echo -e "setting alias $(white 'grep') to $(lightgrey 'grep --color=auto')"
 
+alias devgrep='grep --exclude=*.min.* --exclude=*.json --exclude-dir="node_modules"'
+echo -e "setting alias $(white 'devgrep') to $(lightgrey 'grep grep --exclude=*.min.* --exclude=*.json --exclude-dir="node_modules"')"
+
+
 # some more ls aliases
 alias ll='ls -lF'
 echo -e "setting alias $(white 'll') to $(lightgrey 'ls -lF')"

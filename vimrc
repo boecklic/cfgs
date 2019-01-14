@@ -223,6 +223,8 @@ map <C-Right> :tabn<cr>
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
+" Ctrl-c copies selected parts in visual mode into systems clipboard
+vnoremap <C-c> "*yy
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers

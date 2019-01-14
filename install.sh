@@ -28,6 +28,10 @@ if [ ! \( -e "${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash" \) ]; 
 fi
 graceful_ln ${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash        ~/.git-completion.bash
 
+# setup ssh
+#----------
+graceful_ln ${DIR}/ssh/rc           ~/.ssh/rc
+
 # setup vim
 #----------
 # setup vim-plug, the simple plugin manager for vim, for more details
