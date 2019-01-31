@@ -49,5 +49,27 @@ echo -e "setting alias $(white 'bc') to $(lightgrey 'bc -l') (preload math libra
 alias screen='screen -R -D'
 echo -e "setting alias $(white 'screen') to $(lightgrey 'screen -D -R') (D)etach and (R)eattach a session here and now (detach if necessary, create if necessary)"
 
-alias tmx='tmux new -A -s defaultSession'
-echo -e "setting alias $(white 'tmx') to $(lightgrey 'tmux new -A -s defaultSession') create or reattach to 'defaultSession' "
+#alias tmx='tmux new -A -s defaultSession'
+tmx() {
+    sessions=(`tmux list-sessions | awk '{split($0, a, ":" ); print a[1]}'`)
+    echo "Existing sessions: "
+    for session in "${sessions[@]}"; do
+        echo "    - $session"
+    done
+    #case "${arr[@]}" in *"mf-ch"*) echo "found";; esac
+    if [[ " ${sessions[@]} " =~ " $1 " ]]; then
+        echo "session $1 exists, reattaching..."
+        tmux new -A -s $1
+    else
+        echo "session $1 doesn't exist!"
+        read -p "create new? " -n 1 -r
+        echo    # (optional) move to a new line
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            # do dangerous stuff
+            tmux new -A -s $1
+        fi
+    fi
+}
+echo -e "create function $(white 'tmx sessionName') to $(lightgrey 'tmux new -A -s sessionName') create or reattach to session named 'sessionName' "
+
