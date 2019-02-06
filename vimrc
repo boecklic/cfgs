@@ -224,7 +224,7 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " Ctrl-c copies selected parts in visual mode into systems clipboard
-vnoremap <C-c> "*yy
+vnoremap <C-c> "*y
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -444,6 +444,17 @@ Plug 'https://github.com/scrooloose/nerdtree.git'
 " version.
 " https://github.com/tmux-plugins/vim-tmux-focus-events
 Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Toggling the ToggleWorkspace command on will persistently 
+" track your session found in a current working directory, 
+" and all workspace features will be enabled. Conversely, 
+" toggling the command off will remove the session and disable 
+" the workspace features.
+" If Vim is run with a file argument and it's already in the 
+" session's workspace, Vim will load the session and go to the 
+" tab window that contains it. Otherwise, it will be 
+" loaded as a new tab in the session.
+Plug 'thaerkh/vim-workspace'
 
 " Initialize plugin system
 call plug#end()
