@@ -52,22 +52,23 @@ echo -e "setting alias $(white 'screen') to $(lightgrey 'screen -D -R') (D)etach
 #alias tmx='tmux new -A -s defaultSession'
 tmx() {
     sessions=(`tmux list-sessions | awk '{split($0, a, ":" ); print a[1]}'`)
+    sessionname=${1:-"defaultSession"}
     echo "Existing sessions: "
     for session in "${sessions[@]}"; do
         echo "    - $session"
     done
     #case "${arr[@]}" in *"mf-ch"*) echo "found";; esac
-    if [[ " ${sessions[@]} " =~ " $1 " ]]; then
-        echo "session $1 exists, reattaching..."
-        tmux new -A -s $1
+    if [[ " ${sessions[@]} " =~ " $sessionname " ]]; then
+        echo "session $sessionname exists, reattaching..."
+        tmux new -A -s $sessionname
     else
-        echo "session $1 doesn't exist!"
+        echo "session $sessionname doesn't exist!"
         read -p "create new? " -n 1 -r
         echo    # (optional) move to a new line
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
             # do dangerous stuff
-            tmux new -A -s $1
+            tmux new -A -s $sessionname
         fi
     fi
 }
