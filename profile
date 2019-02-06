@@ -55,5 +55,5 @@ if [ "$TERM" != "linux" ]; then
 fi
 
 # Set Window Title to Hostalias / Hostname
-TITLE="${HOSTALIAS:?$HOSTNAME}"
+TITLE="${HOSTALIAS:-$HOSTNAME}"
 echo -en "\e]0;Host: $USER@$TITLE\a"
