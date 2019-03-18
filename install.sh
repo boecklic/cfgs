@@ -12,10 +12,33 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 . ${DIR}/helpers.sh
 . ${DIR}/bashcolor
 
+graceful_ln ${DIR}/bashrc_user 	    ~/.bashrc_user
 graceful_ln ${DIR}/bash_aliases 	~/.bash_aliases
 graceful_ln ${DIR}/vimrc 			~/.vimrc
 graceful_ln ${DIR}/profile          ~/.profile
 graceful_ln ${DIR}/bash_env         ~/.bash_env
+
+# make sure bashrc sources bashrc_user
+# all bashrc customization is done in ~/.bashrc_user
+
+if ! grep -q "START_SOURCE_BASHRC_USER" $HOME/.bashrc
+then
+    # part doesn't exist, add
+    echo "" >> $HOME/.bashrc
+    echo "# START_SOURCE_BASHRC_USER" >> $HOME/.bashrc
+    echo "# END_SOURCE_BASHRC_USER" >> $HOME/.bashrc
+    echo "added sourceing of ~/.bashrc_user to ~/.bashrc"
+fi
+
+# part exists, replace with current version in case sth changed here
+sed -i.sav '/START_SOURCE_BASHRC_USER/,/END_SOURCE_BASHRC_USER/c\
+# START_SOURCE_BASHRC_USER\
+if [ -f "$HOME/.bashrc_user" ]; then\
+    . "$HOME/.bashrc_user"\
+fi\
+# END_SOURCE_BASHRC_USER' $HOME/.bashrc
+echo "updated sourcing of ~/.bashrc_user in ~/.bashrc"
+
 
 # slightly more logic needed for git-completion since dependant on git version
 GIT_VERSION=`git version | grep -oE "[0-9]*\.[0-9]*\.[0-9]*"`
