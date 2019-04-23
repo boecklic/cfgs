@@ -64,7 +64,9 @@ if [ ! \( -e "${HOME}/.vim/autoload/plug.vim" \) ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-
+# ensure folder is present
+mkdir -p ~/.vim/plugin
+graceful_ln ${DIR}/vim/plugin/vagrantfile.vim ~/.vim/plugin/vagrantfile.vim
 
 # setup tmux
 #-----------
