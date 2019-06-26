@@ -7,3 +7,5 @@ export EDITOR="$VISUAL"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
+# add timestamp to history
+export HISTTIMEFORMAT="[%d.%m.%y %T] "
