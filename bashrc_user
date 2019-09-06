@@ -61,3 +61,8 @@ fi
 # Set Window Title to Hostalias / Hostname
 TITLE="${HOSTALIAS:-$HOSTNAME}"
 echo -en "\e]0;Host: $USER@$TITLE\a"
+
+# install bash-completion for gopass if gopass
+# is installed
+command -v gopass >/dev/null 2>&1 && source <(gopass completion bash)
+
