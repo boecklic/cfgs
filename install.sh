@@ -45,9 +45,8 @@ GIT_VERSION=`git version | grep -oE "[0-9]*\.[0-9]*\.[0-9]*"`
 echo "current git version: $GIT_VERSION"
 if [ ! \( -e "${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash" \) ]; then
     echo "git-completion.bash doesn't exist for installed git version $GIT_VERSION"
-    echo "install first with "
-    echo "curl -fLo ${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash --create-dirs https://github.com/git/git/blob/v$GIT_VERSION/contrib/completion/git-completion.bash"
-    exit 1
+    echo "installing first... "
+    curl -fLo ${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash --create-dirs https://github.com/git/git/blob/v$GIT_VERSION/contrib/completion/git-completion.bash
 fi
 graceful_ln ${DIR}/git/git-completion/$GIT_VERSION/git-completion.bash        ~/.git-completion.bash
 
