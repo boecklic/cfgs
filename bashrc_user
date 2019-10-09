@@ -45,8 +45,17 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 source ${DIR}/bin/git-prompt.sh
 
+# color hostname in red if not on localhost
+# cs005046
+if [[ $(hostname) = "cs005046" ]]; then
+    # 90 is dark grey, they least annoying
+    HOSTCOLOR="0;90"
+else
+    HOSTCOLOR="0;31"
+fi
+
 if [ "$TERM" != "linux" ]; then
-    PROMPT_COMMAND='__git_ps1 "\u@\h:" "\\\$ "'
+    PROMPT_COMMAND='__git_ps1 "\u@\e[${HOSTCOLOR}m\h\e[m:" "\\\$ "'
 fi
 
 # Set Window Title to Hostalias / Hostname
