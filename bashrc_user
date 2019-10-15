@@ -49,13 +49,14 @@ source ${DIR}/bin/git-prompt.sh
 # cs005046
 if [[ $(hostname) = "cs005046" ]]; then
     # 90 is dark grey, they least annoying
-    HOSTCOLOR="0;90"
+    HOSTCOLOR="\e[0;90m"
 else
-    HOSTCOLOR="0;31"
+    HOSTCOLOR="\e[0;31m"
 fi
+RESETCOLOR="\e[m"
 
 if [ "$TERM" != "linux" ]; then
-    PROMPT_COMMAND='__git_ps1 "\u@\e[${HOSTCOLOR}m\h\e[m:" "\\\$ "'
+    PROMPT_COMMAND='__git_ps1 "\u@\[${HOSTCOLOR}\h${RESETCOLOR}\]:" "\\\$ "'
 fi
 
 # Set Window Title to Hostalias / Hostname
