@@ -56,7 +56,7 @@ fi
 RESETCOLOR="\e[m"
 
 if [ "$TERM" != "linux" ]; then
-    PROMPT_COMMAND='__git_ps1 "\u@\[${HOSTCOLOR}\h${RESETCOLOR}\]:" "\\\$ "'
+    PROMPT_COMMAND='__git_ps1 "\u@\[${HOSTCOLOR}\]\h\[${RESETCOLOR}\]:" "\\\$ "'
 fi
 
 # Set Window Title to Hostalias / Hostname
